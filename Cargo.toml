@@ -1,0 +1,50 @@
+[package]
+name = "workback"
+version = "0.1.0"
+edition = "2021"
+path = "src/bin/main.rs"
+
+[profile.dev]
+opt-level = 0
+debug = true
+split-debuginfo = 'packed'
+debug-assertions = true
+overflow-checks = true
+lto = false
+panic = 'abort'
+incremental = true
+codegen-units = 256
+rpath = false
+
+[profile.release]
+opt-level = 3
+debug = false
+split-debuginfo = 'off'
+debug-assertions = false
+overflow-checks = false
+lto = false
+panic = 'abort'
+incremental = false
+codegen-units = 16
+rpath = false
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+env_logger = "0.10.0"
+log = "0.4.17"
+lazy_static = "1.4.0"
+dotenv = "0.15.0"
+function_name = "0.3.0"
+uuid = { version = "1.2.2", features = ["serde", "v4"] }
+regex = "1.7.0"
+num = "0.4.0"
+rand = "0.8.5"
+rstest = "0.16.0"
+prost = "0.12.3"
+tokio = {version = "1.24.1", features = ["full"]}
+prost-types = "0.12.3"
+tonic = { version = "0.11.0", features = ["transport", "tls-roots-common", "tls", "gzip"]}
+
+[build-dependencies]
+tonic-build = "0.11.0"

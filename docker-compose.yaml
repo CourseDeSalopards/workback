@@ -1,0 +1,22 @@
+services:
+  workback:
+    build:
+      context: .
+      target: builder
+      args:
+        - WATCH=1
+    restart: unless-stopped
+    command:
+      - bash
+      - -c
+      - |
+        cargo watch -s 'cargo run --profile dev'
+    # volumes:
+    #   - ./src:/app/src
+    #   - ./certs:/app/certs
+    #   - ./keys:/app/keys
+    #   - ./tests:/app/tests
+    #   - ./migrations:/app/migrations
+    #   - ./proto:/app/proto
+    env_file:
+      - .env
